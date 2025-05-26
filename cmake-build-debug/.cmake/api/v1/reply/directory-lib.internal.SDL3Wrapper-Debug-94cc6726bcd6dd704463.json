@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "lib/internal/SDL3Wrapper",
+		"source" : "lib/internal/SDL3Wrapper"
+	}
+}

@@ -1,0 +1,145 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.30"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "lib/external/SDL",
+					"jsonFile" : "directory-lib.external.SDL-Debug-0dd08e2e96ba6247bc55.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "lib/external/SDL",
+					"targetIndexes" : 
+					[
+						0,
+						2,
+						3
+					]
+				},
+				{
+					"build" : "lib/internal/SDL3Wrapper",
+					"jsonFile" : "directory-lib.internal.SDL3Wrapper-Debug-94cc6726bcd6dd704463.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.30"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "lib/internal/SDL3Wrapper",
+					"targetIndexes" : 
+					[
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						2
+					],
+					"name" : "torpedo",
+					"targetIndexes" : 
+					[
+						1,
+						4
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "SDL3",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "SDL3-static::@cc96542f223d8a18967c",
+					"jsonFile" : "target-SDL3-static-Debug-242b3e7ee760059f4628.json",
+					"name" : "SDL3-static",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "SDL3Wrapper::@086253248a4ffc05073e",
+					"jsonFile" : "target-SDL3Wrapper-Debug-99be8ba29885b6a339fc.json",
+					"name" : "SDL3Wrapper",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "SDL3_test::@cc96542f223d8a18967c",
+					"jsonFile" : "target-SDL3_test-Debug-7b2da6b6d3b343999773.json",
+					"name" : "SDL3_test",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "SDL_uclibc::@cc96542f223d8a18967c",
+					"jsonFile" : "target-SDL_uclibc-Debug-a91f18c480cad0a5ab60.json",
+					"name" : "SDL_uclibc",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "torpedo::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-torpedo-Debug-02863390ef7397bc7264.json",
+					"name" : "torpedo",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/bence/CLionProjects/torpedo/cmake-build-debug",
+		"source" : "C:/Users/bence/CLionProjects/torpedo"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

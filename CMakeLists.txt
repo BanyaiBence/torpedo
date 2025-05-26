@@ -1,0 +1,19 @@
+cmake_minimum_required(VERSION 3.30)
+project(torpedo C)
+
+set(CMAKE_C_STANDARD 23)
+set(SDL_SHARED OFF CACHE BOOL "" FORCE)
+set(SDL_STATIC ON CACHE BOOL "" FORCE)
+set(SDL_VULKAN OFF CACHE BOOL "" FORCE)
+
+add_subdirectory(lib/external/SDL)
+add_subdirectory(lib/internal/SDL3Wrapper)
+
+add_executable(torpedo main.c
+        table.c
+        table.h
+        common.h)
+
+
+target_link_libraries(torpedo PRIVATE SDL3-static)
+target_include_directories(torpedo PRIVATE ${SDL3_INCLUDE_DIRS})

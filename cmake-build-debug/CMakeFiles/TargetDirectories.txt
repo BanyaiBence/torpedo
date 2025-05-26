@@ -1,0 +1,11 @@
+C:/Users/bence/CLionProjects/torpedo/cmake-build-debug/CMakeFiles/torpedo.dir
+C:/Users/bence/CLionProjects/torpedo/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/bence/CLionProjects/torpedo/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/bence/CLionProjects/torpedo/cmake-build-debug/lib/external/SDL/CMakeFiles/SDL3-static.dir
+C:/Users/bence/CLionProjects/torpedo/cmake-build-debug/lib/external/SDL/CMakeFiles/SDL3_test.dir
+C:/Users/bence/CLionProjects/torpedo/cmake-build-debug/lib/external/SDL/CMakeFiles/SDL_uclibc.dir
+C:/Users/bence/CLionProjects/torpedo/cmake-build-debug/lib/external/SDL/CMakeFiles/edit_cache.dir
+C:/Users/bence/CLionProjects/torpedo/cmake-build-debug/lib/external/SDL/CMakeFiles/rebuild_cache.dir
+C:/Users/bence/CLionProjects/torpedo/cmake-build-debug/lib/internal/SDL3Wrapper/CMakeFiles/SDL3Wrapper.dir
+C:/Users/bence/CLionProjects/torpedo/cmake-build-debug/lib/internal/SDL3Wrapper/CMakeFiles/edit_cache.dir
+C:/Users/bence/CLionProjects/torpedo/cmake-build-debug/lib/internal/SDL3Wrapper/CMakeFiles/rebuild_cache.dir

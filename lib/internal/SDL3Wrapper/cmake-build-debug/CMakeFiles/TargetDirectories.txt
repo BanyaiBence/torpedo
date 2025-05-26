@@ -1,0 +1,3 @@
+C:/Users/bence/CLionProjects/torpedo/lib/internal/SDL3Wrapper/cmake-build-debug/CMakeFiles/SDL3Wrapper.dir
+C:/Users/bence/CLionProjects/torpedo/lib/internal/SDL3Wrapper/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/bence/CLionProjects/torpedo/lib/internal/SDL3Wrapper/cmake-build-debug/CMakeFiles/rebuild_cache.dir
