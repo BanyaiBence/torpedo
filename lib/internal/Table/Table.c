@@ -6,7 +6,7 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include "../../../common.h"
+#include "../common.h"
 
 COLOR tile_colors[256] = {
     [EMPTY] = COLOR_RGB(0, 0, 255),

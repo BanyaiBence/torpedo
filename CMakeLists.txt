@@ -13,7 +13,7 @@ add_subdirectory(lib/internal/Table)
 add_executable(torpedo main.c
         lib/internal/Table/Table.c
         lib/internal/Table/Table.h
-        common.h
+        lib/internal/common.h
         lib/internal/Graphics/Graphics.c
         lib/internal/Graphics/Graphics.h
 )

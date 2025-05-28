@@ -33,10 +33,10 @@ int main(void) {
                     if (event.button.button == SDL_BUTTON_LEFT) {
                         float mouse_x, mouse_y;
                         g.get_mouse_position(&g, &mouse_x, &mouse_y);
-                        int tile_x = (int) (mouse_x / TILE_SIZE);
-                        int tile_y = (int) (mouse_y / TILE_SIZE);
+                        const int tile_x = (int) (mouse_x / TILE_SIZE);
+                        const int tile_y = (int) (mouse_y / TILE_SIZE);
 
-                        char current_tile = t.get_tile(&t, tile_x, tile_y);
+                        const tile current_tile = t.get_tile(&t, tile_x, tile_y);
                         switch (current_tile) {
                             case EMPTY:
                                 t.set_tile(&t, tile_x, tile_y, MISS);
