@@ -7,12 +7,16 @@ set(SDL_STATIC ON CACHE BOOL "" FORCE)
 set(SDL_VULKAN OFF CACHE BOOL "" FORCE)
 
 add_subdirectory(lib/external/SDL)
-add_subdirectory(lib/internal/SDL3Wrapper)
+add_subdirectory(lib/internal/Graphics)
+add_subdirectory(lib/internal/Table)
 
 add_executable(torpedo main.c
-        table.c
-        table.h
-        common.h)
+        lib/internal/Table/Table.c
+        lib/internal/Table/Table.h
+        common.h
+        lib/internal/Graphics/Graphics.c
+        lib/internal/Graphics/Graphics.h
+)
 
 
 target_link_libraries(torpedo PRIVATE SDL3-static)

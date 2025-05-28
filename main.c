@@ -1,57 +1,73 @@
 #include <stdio.h>
-#include "table.h"
+#include "lib/internal/Table/Table.h"
 #include <stdlib.h>
 #include <time.h>
-#include "lib/internal/SDL3Wrapper/SDL3Wrapper.h"
 #include <SDL3/SDL.h>
+
 
 int main(void) {
     // Seeding random generator
-    srand(time(NULL));
+    srand(time(nullptr));
 
 
-    table t;
-    table_init(&t);
-    table_generate_random(&t);
-    table_set_ship(&t, 5, 5 ,4, 1);
+    Table t;
+    Table_init(&t);
+    t.generate_random(&t);
+    t.set_tile(&t, 5, 5, HIT);
+    t.set_tile(&t, 3, 3, MISS);
 
-    SDL3_create_window("Torpedo", 800, 800);
-    const COLOR back_color = COLOR {0, 0, 0, 255};
+    Graphics g;
+    Graphics_init(&g);
+    g.create_window(&g, "Battleship", TABLE_SIZE * TILE_SIZE, TABLE_SIZE * TILE_SIZE);
+    const COLOR back_color = {.r = 0, .g = 0, .b = 0, .a = 255};
 
-    while (1) {
+    while (true) {
         SDL_Event event;
         while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_EVENT_QUIT) {
-                SDL3_exit();
-                exit(0);
+            switch (event.type) {
+                case SDL_EVENT_QUIT:
+                    g.exit(&g);
+                    exit(0);
+                    break;
+                case SDL_EVENT_MOUSE_BUTTON_DOWN:
+                    if (event.button.button == SDL_BUTTON_LEFT) {
+                        float mouse_x, mouse_y;
+                        g.get_mouse_position(&g, &mouse_x, &mouse_y);
+                        int tile_x = (int) (mouse_x / TILE_SIZE);
+                        int tile_y = (int) (mouse_y / TILE_SIZE);
+
+                        char current_tile = t.get_tile(&t, tile_x, tile_y);
+                        switch (current_tile) {
+                            case EMPTY:
+                                t.set_tile(&t, tile_x, tile_y, MISS);
+                                break;
+                            case SHIP:
+                                t.set_tile(&t, tile_x, tile_y, HIT);
+                                break;
+                            case HIT:
+                            case MISS:
+                                // Do nothing if already hit or missed
+                                break;
+                            default:
+                                // Handle unexpected cases
+                                fprintf(stderr, "Unexpected tile value: %c\n", current_tile);
+                                break;
+                        }
+                    }
+                    break;
+                default: ;
             }
         }
-        SDL3_fill_window(back_color);
+        g.fill_window(&g, back_color);
 
         for (int i = 0; i < TABLE_SIZE; i++) {
             for (int j = 0; j < TABLE_SIZE; j++) {
-                tile val = table_get_tile(&t, i, j);
-                COLOR tile_color  {0, 0, 0, 0};
-                switch (val) {
-                    case EMPTY:
-                        tile_color  {0, 0, 255, 255};
-                        break;
-                    case SHIP:
-                        tile_color  {150, 150, 150, 255};
-                        break;
-                    case HIT:
-                        tile_color {0, 255, 0, 255};
-                    case MISS:
-                        tile_color {255, 0, 0, 255};
-                        break;
-                }
-                SDL3_draw_rect(j*TILE_SIZE, i*TILE_SIZE, TILE_SIZE, TILE_SIZE, tile_color);
+                const tile val = t.get_tile(&t, i, j);
+                const COLOR tile_color = tile_colors[val];
+                g.draw_rect(&g, i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE, TILE_SIZE, tile_color);
             }
         }
-        SDL3_update();
+        g.update(&g);
     }
-    SDL3_exit();
-
-
     return 0;
 }

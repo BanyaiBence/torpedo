@@ -2,21 +2,33 @@
 // Created by bence on 2025. 05. 24..
 //
 #include <stdio.h>
-#include "table.h"
+#include "Table.h"
 
 #include <string.h>
 #include <stdlib.h>
-#include "common.h"
+#include "../../../common.h"
 
+COLOR tile_colors[256] = {
+    [EMPTY] = COLOR_RGB(0, 0, 255),
+    [SHIP] = COLOR_RGB(150, 150, 150),
+    [HIT] = COLOR_RGB(0, 255, 0),
+    [MISS] = COLOR_RGB(255, 0, 0),
+};
 
-inline bool table_init(table *t) {
+inline bool Table_init(Table *t) {
     t->size = TABLE_SIZE;
     memset(t->tiles, EMPTY, sizeof(t->tiles));
+    t->print = Table_print;
+    t->set_tile = Table_set_tile;
+    t->get_tile = Table_get_tile;
+    t->set_ship = Table_set_ship;
+    t->generate_random = Table_generate_random;
+
 
     return true;
 }
 
-inline bool table_print(table *t) {
+inline bool Table_print(Table *t) {
     // Header
     printf("  ");
     for (int i = 0; i < t->size; i++) {
@@ -40,7 +52,7 @@ inline bool table_print(table *t) {
     return true;
 }
 
-inline bool table_set_tile(table *t, unsigned int x, unsigned int y, tile value) {
+inline bool Table_set_tile(Table *t, unsigned int x, unsigned int y, tile value) {
     if (x >= t->size || y >= t->size) {
         return false; // Out of bounds
     }
@@ -48,7 +60,7 @@ inline bool table_set_tile(table *t, unsigned int x, unsigned int y, tile value)
     return true;
 }
 
-inline tile table_get_tile(table *t, unsigned int x, unsigned int y) {
+inline tile Table_get_tile(Table *t, unsigned int x, unsigned int y) {
     if (x >= t->size || y >= t->size) {
         perror("Error: Coordinates out of bounds");
         return EMPTY; // Out of bounds, return default tile
@@ -56,17 +68,17 @@ inline tile table_get_tile(table *t, unsigned int x, unsigned int y) {
     return t->tiles[y * t->size + x];
 }
 
-inline bool table_set_ship(table *t, unsigned int x, unsigned int y, unsigned int ship_size, bool horizontal) {
+inline bool Table_set_ship(Table *t, unsigned int x, unsigned int y, unsigned int ship_size, bool horizontal) {
     if (horizontal) {
         if (x + ship_size > t->size || y >= t->size) {
             return false; // Out of bounds
         }
         for (size_t i = 0; i < ship_size; i++)
-            if ((char)table_get_tile(t, x + i, y) != (char)EMPTY)
+            if ((char) Table_get_tile(t, x + i, y) != (char) EMPTY)
                 return false; // Overlaps with existing ship
 
         for (size_t i = 0; i < ship_size; i++)
-            table_set_tile(t, x + i, y, SHIP);
+            Table_set_tile(t, x + i, y, SHIP);
 
         return true;
     }
@@ -74,26 +86,28 @@ inline bool table_set_ship(table *t, unsigned int x, unsigned int y, unsigned in
         return false; // Out of bounds
     }
     for (size_t i = 0; i < ship_size; i++)
-        if ((char)table_get_tile(t, x, y + i) != (char)EMPTY) {
+        if ((char) Table_get_tile(t, x, y + i) != (char) EMPTY) {
             return false; // Overlaps with existing ship
         }
 
     for (size_t i = 0; i < ship_size; i++)
-        table_set_tile(t, x, y + i, SHIP);
+        Table_set_tile(t, x, y + i, SHIP);
 
     return true;
 }
 
-inline bool table_generate_random(table *t) {
+inline bool Table_generate_random(Table *t) {
     const unsigned int ships[] = {5, 4, 4, 3, 3, 2, 2, 1, 1};
 
-    FOREACH(unsigned int ship_size, ships) {
+    foreach(unsigned int ship_size, ships) {
         unsigned x, y, horizontal;
         do {
             x = rand() % t->size;
             y = rand() % t->size;
             horizontal = (rand() % 2);
-        } while (!table_set_ship(t, x, y, ship_size, horizontal));
+        } while (!Table_set_ship(t, x, y, ship_size, horizontal));
     }
     return true;
 }
+
+
