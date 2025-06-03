@@ -1,9 +1,9 @@
 //
-// Created by bence on 2025. 05. 24..
+// Created by bence on 2025. 06. 03..
 //
 
-#ifndef COMMON_H
-#define COMMON_H
+#ifndef UTILMACROS_H
+#define UTILMACROS_H
 
 #define count_of(x) (sizeof(x) / sizeof(x[0]))
 
@@ -20,8 +20,8 @@ _keep_ && i < count_of(_array_); \
 _keep_ = !_keep_, i--) \
 for (_item_ = _array_[i]; _keep_; _keep_ = !_keep_)
 
+#define max(a, b) ((a) > (b)? (a) : (b))
 
+#define min(a, b) ((a) < (b)? (a) : (b))
 
-
-
-#endif //COMMON_H
+#endif //UTILMACROS_H

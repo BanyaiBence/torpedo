@@ -22,25 +22,22 @@ extern COLOR tile_colors[256]; // assuming char (1 byte)
 
 
 typedef struct Table Table;
+
 struct Table {
     int size;
     tile tiles[TABLE_SIZE * TABLE_SIZE];
-    bool (*print) (struct Table *t);
-    bool (*set_tile) (struct Table *t, unsigned int x, unsigned int y, tile value);
-    tile (*get_tile) (struct Table *t, unsigned int x, unsigned int y);
-    bool (*set_ship) (struct Table *t, unsigned int x, unsigned int y, unsigned int ship_size, bool horizontal);
-    bool (*generate_random) (struct Table *t);
-};
 
-typedef struct {
-    int x;
-    int y;
-} pos;
+    bool (*set_tile)(Table *t, unsigned int x, unsigned int y, tile value);
+
+    tile (*get_tile)(Table *t, unsigned int x, unsigned int y);
+
+    bool (*set_ship)(Table *t, unsigned int x, unsigned int y, unsigned int ship_size, bool horizontal);
+
+    bool (*generate_random)(Table *t);
+};
 
 
 bool Table_init(Table *t);
-
-bool Table_print(Table *t);
 
 bool Table_set_tile(Table *t, unsigned int x, unsigned int y, tile value);
 
@@ -50,6 +47,7 @@ bool Table_set_ship(Table *t, unsigned int x, unsigned int y, unsigned int ship_
 
 bool Table_generate_random(Table *t);
 
+bool Table_row_is_empty(Table *t, unsigned int startX, unsigned int startY, unsigned int endX, unsigned int endY);
 
 
 #endif //TABLE_H

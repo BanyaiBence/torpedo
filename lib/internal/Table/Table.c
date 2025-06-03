@@ -6,7 +6,7 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include "../common.h"
+#include "../UtilMacros/UtilMacros.h"
 
 COLOR tile_colors[256] = {
     [EMPTY] = COLOR_RGB(0, 0, 255),
@@ -18,7 +18,6 @@ COLOR tile_colors[256] = {
 inline bool Table_init(Table *t) {
     t->size = TABLE_SIZE;
     memset(t->tiles, EMPTY, sizeof(t->tiles));
-    t->print = Table_print;
     t->set_tile = Table_set_tile;
     t->get_tile = Table_get_tile;
     t->set_ship = Table_set_ship;
@@ -28,29 +27,6 @@ inline bool Table_init(Table *t) {
     return true;
 }
 
-inline bool Table_print(Table *t) {
-    // Header
-    printf("  ");
-    for (int i = 0; i < t->size; i++) {
-        const int num_of_spaces = (i < 9) ? 2 : 1; // For single digit numbers
-
-        printf("%d", i + 1);
-
-        for (int j = 0; j < num_of_spaces; j++)
-            printf(" ");
-    }
-    printf("\n");
-
-    // Tiles
-    for (int i = 0; i < t->size; i++) {
-        printf("%c  ", 65 + i); // Row numbers
-        for (int j = 0; j < t->size; j++) {
-            printf("%c  ", t->tiles[i * t->size + j]);
-        }
-        printf("\n");
-    }
-    return true;
-}
 
 inline bool Table_set_tile(Table *t, unsigned int x, unsigned int y, tile value) {
     if (x >= t->size || y >= t->size) {
@@ -68,27 +44,38 @@ inline tile Table_get_tile(Table *t, unsigned int x, unsigned int y) {
     return t->tiles[y * t->size + x];
 }
 
+inline bool Table_row_is_empty(Table *t, unsigned int startX, unsigned int startY, unsigned int endX,
+                               unsigned int endY) {
+    if (startX >= t->size || startY >= t->size || endX >= t->size || endY >= t->size)
+        return false; // Out of bounds
+
+    for (unsigned int y = startY; y <= endY; y++)
+        for (unsigned int x = startX; x <= endX; x++)
+            if (Table_get_tile(t, x, y) != EMPTY)
+                return false; // Found a non-empty tile
+
+
+    return true; // All tiles in the range are empty
+}
+
+
 inline bool Table_set_ship(Table *t, unsigned int x, unsigned int y, unsigned int ship_size, bool horizontal) {
     if (horizontal) {
-        if (x + ship_size > t->size || y >= t->size) {
-            return false; // Out of bounds
-        }
-        for (size_t i = 0; i < ship_size; i++)
-            if ((char) Table_get_tile(t, x + i, y) != (char) EMPTY)
-                return false; // Overlaps with existing ship
+        if (!Table_row_is_empty(t, x, y, x + ship_size - 1, y))
+            return false; // Overlaps with existing ship
+
 
         for (size_t i = 0; i < ship_size; i++)
             Table_set_tile(t, x + i, y, SHIP);
 
         return true;
     }
-    if (x >= t->size || y + ship_size > t->size) {
-        return false; // Out of bounds
-    }
-    for (size_t i = 0; i < ship_size; i++)
-        if ((char) Table_get_tile(t, x, y + i) != (char) EMPTY) {
-            return false; // Overlaps with existing ship
-        }
+
+    // Vertical placement
+
+    if (!Table_row_is_empty(t, x, y, x, y + ship_size - 1))
+        return false; // Overlaps with existing ship
+
 
     for (size_t i = 0; i < ship_size; i++)
         Table_set_tile(t, x, y + i, SHIP);
@@ -109,5 +96,3 @@ inline bool Table_generate_random(Table *t) {
     }
     return true;
 }
-
-

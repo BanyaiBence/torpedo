@@ -13,6 +13,7 @@
 #define COLOR_RGB(r, g, b) (COLOR){r, g, b, 255}
 
 typedef struct Graphics Graphics;
+
 struct Graphics {
     RENDERER *renderer;
     WINDOW *window;
@@ -33,10 +34,10 @@ struct Graphics {
 
 void Graphics_init(Graphics *self);
 
-void Graphics_create_window(Graphics *self, const char *title, const int width, const int height);
+void Graphics_create_window(Graphics *self, const char *title, int width, const int height);
 
-void Graphics_draw_rect(Graphics *self, const float x, const float y, const float width, const float height,
-                        const COLOR color);
+void Graphics_draw_rect(Graphics *self, float x, float y, float width, float height,
+                        COLOR color);
 
 void Graphics_fill_window(Graphics *self, const COLOR color);
 
