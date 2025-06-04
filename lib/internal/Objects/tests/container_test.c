@@ -6,14 +6,15 @@
 #include "../../UtilMacros/UtilMacros.h"
 
 int main() {
-    Container cs[100];
+    Container* cs[100];
+
     for (int i = 0; i < 100; i++) {
-        Container c;
-        cs[i] = c;
+        cs[i] = new(Container);
     }
-    foreach(Container c, cs) {
-        c.print(&c);
-        c.base.print(&c.base);
+    foreach(Container* c, cs) {
+        c->print(c);
+    }
+    foreach(Container* c, cs) {
         del(c);
     }
 

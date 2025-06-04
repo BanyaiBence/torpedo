@@ -14,9 +14,8 @@ class(Container, Object)
 endclass(Container, Object)
 
 static void Container_destroy(Container* self) {
-    super_destroy_Container(self);
+    //self->base.destroy(&(self->base)); // Call the base class destroy method
     free(self->data);
-    free(self);
 }
 
 static void Container_init(Container* self) {

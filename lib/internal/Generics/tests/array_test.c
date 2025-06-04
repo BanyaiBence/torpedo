@@ -13,6 +13,13 @@
 #define COMPARE_ARRAY_T(a, b) ((a) == (b))
 #define ARRAY_T_PRINT_FORMAT "%f" // Default format for printing doubles
 #include "../Array.h"
+#include "../../Objects/Container.h"
+#include "../../Objects/Object.h"
+#define ARRAY_NAME Array_Container
+#define ARRAY_T Container*
+#define ARRAY_T_DEFAULT NULL
+#include "../Array.h"
+
 
 int main(void) {
     Array_int array;
@@ -67,6 +74,24 @@ int main(void) {
     array2.destroy(&array2);
     assert(array2.count == 0); // Ensure the double array is empty after destruction
     assert(array2.items == NULL); // Ensure the items pointer is NULL after destruction
+
+    Array_Container array3;
+    Array_Container_init_with_destroy(&array3, Container_destroy);
+    assert(array3.count == 0); // Ensure the Container array is initialized empty
+    assert(array3.capacity == 0); // Ensure the initial capacity is zero
+    assert(array3.items == NULL); // Ensure the items pointer is NULL
+    assert(array3.push != NULL); // Ensure the push function is initialized
+    Container* c1 = new(Container);
+    Container* c2 = new(Container);
+    Container* c3 = new(Container);
+    c1->id = 1;
+    c2->id = 3;
+    c3->id = 2;
+    array3.push(&array3, c1);
+    array3.push(&array3, c2);
+    array3.push(&array3, c3);
+
+
 
     return 0;
 }

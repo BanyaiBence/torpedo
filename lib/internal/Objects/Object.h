@@ -13,10 +13,9 @@
 
 atomic_size_t __GLOBAL_OBJECT_ID = ATOMIC_VAR_INIT(0);
 
-static char* concat_type_id(const char* base_type_id, const char* class_name) {
-
+static char *concat_type_id(const char *base_type_id, const char *class_name) {
     const size_t length = strlen(base_type_id) + strlen(class_name) + 2; // +2 for separator and null terminator
-    char* result = malloc(length);
+    char *result = malloc(length);
     if (result == NULL) {
         fprintf(stderr, "Error: Memory allocation failed.\n");
         exit(EXIT_FAILURE);
@@ -37,8 +36,24 @@ static size_t get_new_object_id() {
 #define GET_MACRO(_1, _2, NAME, ...) NAME
 #define class(...) EXPAND(GET_MACRO(__VA_ARGS__, CLASS_INHERITS, CLASS_SIMPLE)(__VA_ARGS__))
 #define endclass(...) EXPAND(GET_MACRO(__VA_ARGS__, END_CLASS_INHERITS, END_CLASS_SIMPLE)(__VA_ARGS__))
-#define new(ClassName, ObjectName) ClassName ObjectName; ClassName ## _init(&ObjectName)
-#define del(ObjectName) ObjectName.destroy(&ObjectName)
+
+#define new(ClassName) ({ \
+ClassName* __obj = malloc(sizeof(ClassName)); \
+if (!__obj) { \
+fprintf(stderr, "Allocation failed for " #ClassName "\n"); \
+exit(EXIT_FAILURE); \
+} \
+ClassName##_init(__obj); \
+__obj; \
+})
+
+#define del(ObjectPtr) do { \
+if (ObjectPtr) { \
+ObjectPtr->destroy(ObjectPtr); \
+free(ObjectPtr); \
+ObjectPtr = NULL; \
+} \
+} while(0)
 
 // Base class with no inheritance
 #define CLASS_SIMPLE(ClassName) \
@@ -70,7 +85,6 @@ self->type_id = #ClassName; \
 }
 
 
-
 #define END_CLASS_INHERITS(ClassName, BaseName) }; \
 void super_print_##ClassName(ClassName* self) { \
 printf("%s(ID:%zu)\n", self->type_id, self->id); \
@@ -80,16 +94,15 @@ self->id = get_new_object_id(); \
 self->print = super_print_##ClassName; \
 self-> type_id = #ClassName; \
 BaseName ## _init(&(self->base)); \
-} \
-void super_destroy_##ClassName(ClassName* self) { \
-self->base.destroy(&self->base); \
 }
 
 class(Object)
-    bool (*equals)(const Object *self, const Object *other);
-    void (*destroy)(Object *self);
-endclass(Object)
 
+    bool (*equals)(const Object *self, const Object *other);
+
+    void (*destroy)(Object *self);
+
+endclass(Object)
 
 
 static bool Object_equals(const Object *self, const Object *other) {
@@ -98,7 +111,6 @@ static bool Object_equals(const Object *self, const Object *other) {
 
 static void Object_destroy(Object *self) {
     free(self->type_id);
-    free(self);
 }
 
 static void Object_init(Object *obj) {
