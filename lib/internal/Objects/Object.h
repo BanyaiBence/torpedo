@@ -5,39 +5,110 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
+#include <stdatomic.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
-#include "./Class.h"
 
-class(Object){
-    const char *type_id; // Unique identifier for the type of object
+atomic_size_t __GLOBAL_OBJECT_ID = ATOMIC_VAR_INIT(0);
 
-    void (*destroy)(Object *self); // Function pointer for destroying the object
-    void (*print)(const Object *self); // Function pointer for printing the object
-    bool (*equals)(const Object *self, const Object *other); // Function pointer for comparing two objects
-    void (*set_type_id)(Object *self, const char *type_id); // Function pointer to set the type ID of the object
-    char* (*get_type_id)(const Object *self); // Function pointer to get the type ID of the object
-};
+static char* concat_type_id(const char* base_type_id, const char* class_name) {
 
-static inline void Object_init(Object *obj, const char *type_id,
-                            void (*destroy_fn)(Object *self),
-                            void (*print_fn)(const Object *self),
-                            bool (*equals_fn)(const Object *self, const Object *other),
-                            void (*set_type_id_fn)(Object *self, const char *type_id),
-                            char* (*get_type_id_fn)(const Object *self)
-                               ) {
+    const size_t length = strlen(base_type_id) + strlen(class_name) + 2; // +2 for separator and null terminator
+    char* result = malloc(length);
+    if (result == NULL) {
+        fprintf(stderr, "Error: Memory allocation failed.\n");
+        exit(EXIT_FAILURE);
+    }
+    snprintf(result, length, "%s/%s", base_type_id, class_name);
+    return result;
+}
+
+static size_t get_new_object_id() {
+    return atomic_fetch_add(&__GLOBAL_OBJECT_ID, 1);
+}
+
+
+// Expand arguments (to support optional second argument)
+#define EXPAND(x) x
+
+// Detect if there's a second argument
+#define GET_MACRO(_1, _2, NAME, ...) NAME
+#define class(...) EXPAND(GET_MACRO(__VA_ARGS__, CLASS_INHERITS, CLASS_SIMPLE)(__VA_ARGS__))
+#define endclass(...) EXPAND(GET_MACRO(__VA_ARGS__, END_CLASS_INHERITS, END_CLASS_SIMPLE)(__VA_ARGS__))
+#define new(ClassName, ObjectName) ClassName ObjectName; ClassName ## _init(&ObjectName)
+#define del(ObjectName) ObjectName.destroy(&ObjectName)
+
+// Base class with no inheritance
+#define CLASS_SIMPLE(ClassName) \
+typedef struct ClassName ClassName; \
+struct ClassName { \
+char* type_id; \
+int id; \
+void (*print)(ClassName* self);
+
+
+// Class with inheritance (first field is the parent)
+#define CLASS_INHERITS(ClassName, BaseName) \
+typedef struct ClassName ClassName; \
+struct ClassName { \
+BaseName base; \
+char* type_id; \
+int id; \
+void (*print)(ClassName* self);
+
+
+#define END_CLASS_SIMPLE(ClassName) }; \
+void super_print_##ClassName(ClassName* self) { \
+printf("%s(ID:%zu)\n", self->type_id, self->id); \
+} \
+void  super_init_##ClassName(ClassName* self){ \
+self->id = get_new_object_id(); \
+self->print = super_print_##ClassName; \
+self->type_id = #ClassName; \
+}
+
+
+
+#define END_CLASS_INHERITS(ClassName, BaseName) }; \
+void super_print_##ClassName(ClassName* self) { \
+printf("%s(ID:%zu)\n", self->type_id, self->id); \
+} \
+void  super_init_##ClassName(ClassName* self){ \
+self->id = get_new_object_id(); \
+self->print = super_print_##ClassName; \
+self-> type_id = #ClassName; \
+BaseName ## _init(&(self->base)); \
+} \
+void super_destroy_##ClassName(ClassName* self) { \
+self->base.destroy(&self->base); \
+}
+
+class(Object)
+    bool (*equals)(const Object *self, const Object *other);
+    void (*destroy)(Object *self);
+endclass(Object)
+
+
+
+static bool Object_equals(const Object *self, const Object *other) {
+    return self->id == other->id;
+}
+
+static void Object_destroy(Object *self) {
+    free(self->type_id);
+    free(self);
+}
+
+static void Object_init(Object *obj) {
+    super_init_Object(obj);
     if (obj == NULL) {
         fprintf(stderr, "Error: Object pointer is NULL.\n");
         exit(EXIT_FAILURE);
     }
-    obj->type_id = type_id;
-    obj->destroy = destroy_fn;
-    obj->print = print_fn;
-    obj->equals = equals_fn;
-    obj->set_type_id = set_type_id_fn;
-    obj->get_type_id = get_type_id_fn;
+    obj->equals = Object_equals;
+    obj->destroy = Object_destroy;
 }
 
 #endif //OBJECT_H
