@@ -15,8 +15,8 @@
 #include "../Array.h"
 
 int main(void) {
-    int_Array array;
-    int_Array_init(&array);
+    Array_int array;
+    Array_int_init(&array);
     assert(array.count == 0); // Ensure the array is initialized empty
     assert(array.capacity == 0); // Ensure the initial capacity is zero
     assert(array.items == NULL); // Ensure the items pointer is NULL
@@ -41,8 +41,8 @@ int main(void) {
     assert(array.count == 0); // Ensure the array is empty after destruction
     assert(array.items == NULL); // Ensure the items pointer is NULL after destruction
 
-    double_Array array2;
-    double_Array_init(&array2);
+    Array_double array2;
+    Array_double_init(&array2);
     assert(array2.count == 0); // Ensure the double array is initialized empty
     assert(array2.capacity == 0); // Ensure the initial capacity is zero
     assert(array2.items == NULL); // Ensure the items pointer is NULL

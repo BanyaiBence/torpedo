@@ -1,6 +1,7 @@
 # Declare your library target
 add_library(Generics STATIC
         Array.h
+        Either.h
 )
 set_target_properties(Generics PROPERTIES LINKER_LANGUAGE C)
 

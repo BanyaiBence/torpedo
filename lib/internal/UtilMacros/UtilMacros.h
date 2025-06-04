@@ -24,4 +24,21 @@ for (_item_ = _array_[i]; _keep_; _keep_ = !_keep_)
 
 #define min(a, b) ((a) < (b)? (a) : (b))
 
+# define is_box(box) \
+({ \
+    if (box == NULL) { \
+        fprintf(stderr, "Box is NULL\n"); \
+        exit(EXIT_FAILURE); \
+    } \
+    if (box->value == NULL) { \
+        fprintf(stderr, "Box value is NULL\n"); \
+        exit(EXIT_FAILURE); \
+    } \
+    true; \
+})
+if (strncmp(box->base.type_id, "Box_", 4) != 0) {
+    fprintf(stderr, "Only boxed types are allowed\n");
+    exit(EXIT_FAILURE);
+}
+
 #endif //UTILMACROS_H
