@@ -18,6 +18,8 @@
 #define ARRAY_NAME Array_Container
 #define ARRAY_T Container*
 #define ARRAY_T_DEFAULT NULL
+#define ORDER_ARRAY_T(a, b) ((a->id) < (b->id))
+#define COMPARE_ARRAY_T(a, b) ((a->id) == (b->id))
 #include "../Array.h"
 
 
@@ -90,6 +92,21 @@ int main(void) {
     array3.push(&array3, c1);
     array3.push(&array3, c2);
     array3.push(&array3, c3);
+
+    for (int i = 0; i < array3.count; i++) {
+        Container* c = array3.get(&array3, i);
+        assert(c != NULL); // Ensure no NULL pointers in the array
+        printf("Container ID: %d\n", c->id); // Print the ID of each container
+    }
+
+    array3.sort(&array3);
+
+
+    for (int i = 0; i < array3.count; i++) {
+        Container* c = array3.get(&array3, i);
+        assert(c != NULL); // Ensure no NULL pointers in the array
+        printf("Container ID: %d\n", c->id); // Print the ID of each container
+    }
 
 
 

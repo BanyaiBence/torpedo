@@ -24,5 +24,7 @@ for (_item_ = _array_[i]; _keep_; _keep_ = !_keep_)
 
 #define min(a, b) ((a) < (b)? (a) : (b))
 
+#define WITH(obj) \
+for (typeof(obj) _this = (obj); _this; _this = NULL)
 
 #endif //UTILMACROS_H

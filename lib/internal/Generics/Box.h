@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include "../Objects/Object.h"
 
 #define ARRAY_COMB(pre, word) __ARRAY_COMB(pre, word)
 #define __ARRAY_COMB(pre, word) pre##word
@@ -29,17 +30,25 @@
 
 typedef struct BOX_NAME BOX_NAME;
 
-struct BOX_NAME {
+class (BOX_NAME, Object)
     BOX_T *value; // Pointer to the box value
     bool is_initialized; // Flag to check if the value is initialized
 
     void (*set)(BOX_NAME *b, BOX_T value);
+
     void (*free)(BOX_NAME *b);
+
     BOX_T (*unwrap)(const BOX_NAME *b);
+
     void (*try_unwrap)(const BOX_NAME *b, BOX_T *value);
+
     void (*clone)(BOX_NAME *dst, const BOX_NAME *src);
-};
+
+    void (*destroy)(BOX_NAME *b);
+endclass(BOX_NAME, Object);
+
 #define BOX_set BOX_IMPL(set)
+
 static void BOX_set(BOX_NAME *b, BOX_T value) {
     if (!b->is_initialized) {
         b->value = malloc(sizeof(BOX_T));
@@ -51,14 +60,18 @@ static void BOX_set(BOX_NAME *b, BOX_T value) {
     }
     *(b->value) = value;
 }
+
 #define BOX_free BOX_IMPL(free)
+
 static void BOX_free(BOX_NAME *b) {
     if (b->is_initialized) {
         free(b->value);
         b->is_initialized = false;
     }
 }
+
 #define BOX_unwrap BOX_IMPL(unwrap)
+
 static BOX_T BOX_unwrap(const BOX_NAME *b) {
     if (!b->is_initialized) {
         fprintf(stderr, "Error: Attempted to unwrap uninitialized Box.\n");
@@ -68,15 +81,25 @@ static BOX_T BOX_unwrap(const BOX_NAME *b) {
 }
 
 #define BOX_try_unwrap BOX_IMPL(try_unwrap)
+
 static void BOX_try_unwrap(const BOX_NAME *b, BOX_T *value) {
     if (b->is_initialized && b->value != NULL) {
         *value = *(b->value);
     }
 }
+#define BOX_destroy BOX_IMPL(destroy)
 
-
+static void BOX_destroy(BOX_NAME *b) {
+    if (b->is_initialized) {
+        if (b->value != NULL) {
+            free(b->value);
+        }
+        b->is_initialized = false;
+    }
+}
 
 #define BOX_init BOX_IMPL(init)
+
 static void BOX_init(BOX_NAME *b) {
     b->value = NULL;
     b->is_initialized = false;
@@ -84,23 +107,7 @@ static void BOX_init(BOX_NAME *b) {
     b->free = BOX_free;
     b->unwrap = BOX_unwrap;
     b->try_unwrap = BOX_try_unwrap;
-
-}
-
-#define BOX_clone BOX_IMPL(clone)
-static void BOX_clone(BOX_NAME *dst, const BOX_NAME *src) {
-    if (!src->is_initialized) {
-        fprintf(stderr, "Error: Attempted to clone uninitialized Box.\n");
-        exit(EXIT_FAILURE);
-    }
-    BOX_init(dst);
-    dst->set(dst, src->unwrap(src));
-}
-
-#define BOX_init_and_set BOX_IMPL(init_and_set)
-static void BOX_init_and_set(BOX_NAME *b, BOX_T value) {
-    BOX_init(b);
-    b->set(b, value);
+    b->destroy = BOX_destroy;
 }
 
 
@@ -110,4 +117,3 @@ static void BOX_init_and_set(BOX_NAME *b, BOX_T value) {
 #undef BOX_NAME
 #undef BOX_PREFIX
 #undef BOX_IMPL
-

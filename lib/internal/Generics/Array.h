@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include "../Objects/Object.h"
 
 // Macro helpers
 #define ARRAY_COMB(pre, word) __ARRAY_COMB(pre, word)
@@ -31,10 +32,7 @@
 #define ARRAY_PREFIX ARRAY_COMB(ARRAY_NAME, _)
 #define ARRAY_IMPL(word) ARRAY_COMB(ARRAY_PREFIX, word)
 
-// Struct definition
-typedef struct ARRAY_NAME ARRAY_NAME;
-
-struct ARRAY_NAME {
+class (ARRAY_NAME, Object)
     bool is_initialized;
     ARRAY_T *items;
     size_t count;
@@ -49,11 +47,10 @@ struct ARRAY_NAME {
     void (*expand)(ARRAY_NAME *array, size_t new_capacity);
     void (*shrink)(ARRAY_NAME *array);
     void (*sort)(ARRAY_NAME *array);
-    void (*print)(ARRAY_NAME *array);
 
     // New: optional element destructor
     void (*destroy_element)(ARRAY_T item);
-};
+endclass(ARRAY_NAME, Object);
 
 // Function implementations
 #define ARRAY_expand ARRAY_IMPL(expand)
@@ -168,11 +165,6 @@ static void ARRAY_print(ARRAY_NAME *array) {
     }
     printf("]\n");
 }
-
-#define ARRAY_foreach(array, item) \
-    for (size_t i = 0; i < array->count; ++i) { \
-        ARRAY_T item = array->items[i]; \
-        if (item != ARRAY_T_DEFAULT)
 
 #define ARRAY_init ARRAY_IMPL(init)
 static void ARRAY_init(ARRAY_NAME *array) {
