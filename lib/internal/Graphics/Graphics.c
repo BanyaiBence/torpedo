@@ -3,7 +3,7 @@
 //
 
 #include "Graphics.h"
-
+#include <stdlib.h>
 
 inline void Graphics_create_window(Graphics *self, const char *title, const int width, const int height) {
     self->window = SDL_CreateWindow(title,
