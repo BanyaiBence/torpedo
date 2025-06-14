@@ -3,11 +3,14 @@ project(torpedo C)
 
 
 set(CMAKE_C_STANDARD 23)
-set(SDL_SHARED OFF CACHE BOOL "" FORCE)
-set(SDL_STATIC ON CACHE BOOL "" FORCE)
-set(SDL_VULKAN OFF CACHE BOOL "" FORCE)
 
-add_subdirectory(lib/external/SDL)
+# set the output directory for built objects.
+# This makes sure that the dynamic library goes into the build directory automatically.
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
+
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
+
+add_subdirectory(lib/external/SDL EXCLUDE_FROM_ALL)
 add_subdirectory(lib/internal/Graphics)
 add_subdirectory(lib/internal/Table)
 add_subdirectory(lib/internal/Generics)
@@ -24,5 +27,5 @@ add_executable(torpedo main.c
         lib/internal/UtilMacros/UtilMacros.h
 )
 
-target_link_libraries(torpedo PRIVATE SDL3-static)
-target_include_directories(torpedo PRIVATE ${SDL3_INCLUDE_DIRS})
+target_link_libraries(torpedo PRIVATE SDL3::SDL3)
+#target_include_directories(torpedo PRIVATE ${SDL3_INCLUDE_DIRS})

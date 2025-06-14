@@ -8,7 +8,7 @@ add_library(Graphics
 # option(BUILD_SHARED_LIBS "Build shared libraries" ON)
 
 # Link SDL3 (static)
-target_link_libraries(Graphics PRIVATE SDL3::SDL3-static)
+target_link_libraries(Graphics PRIVATE SDL3::SDL3)
 
 # Include directories (optional, but good for future extensions)
 # If you have headers in this directory:

@@ -6,7 +6,7 @@ add_library(Table
 
 # Link SDL3 (static)
 target_link_libraries(Table PRIVATE Graphics)
-
+target_link_libraries(Table PRIVATE SDL3::SDL3)
 
 target_include_directories(Table
         PUBLIC
