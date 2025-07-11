@@ -5,6 +5,7 @@
 #include "Graphics.h"
 #include <stdlib.h>
 
+
 inline void Graphics_create_window(Graphics *self, const char *title, const int width, const int height) {
     self->window = SDL_CreateWindow(title,
                                     width,
@@ -25,15 +26,22 @@ inline void Graphics_create_window(Graphics *self, const char *title, const int 
     }
 }
 
-inline void Graphics_draw_rect(Graphics *self, const float x, const float y, const float width, const float height,
+inline void Graphics_fill_rect(Graphics *self, const float x, const float y, const float width, const float height,
                                const COLOR color) {
     SDL_SetRenderDrawColor(self->renderer, color.r, color.g, color.b, color.a);
     const RECT rect = {x, y, width, height};
     SDL_RenderFillRect(self->renderer, &rect);
 }
 
+inline void Graphics_draw_rect(Graphics *self, float x, float y, float width, float height, COLOR color) {
+    SDL_SetRenderDrawColor(self->renderer, color.r, color.g, color.b, color.a);
+    const RECT rect = {x, y, width, height};
+    SDL_RenderRect(self->renderer, &rect);
+}
+
 inline void Graphics_fill_window(Graphics *self, const COLOR color) {
     SDL_SetRenderDrawColor(self->renderer, color.r, color.g, color.b, color.a);
+    SDL_RenderFillRect(self->renderer, NULL);
 }
 
 inline void Graphics_update(Graphics *self) {
@@ -60,6 +68,7 @@ void Graphics_init(Graphics *self) {
     self->renderer = nullptr;
     self->create_window = Graphics_create_window;
     self->draw_rect = Graphics_draw_rect;
+    self->fill_rect = Graphics_fill_rect;
     self->fill_window = Graphics_fill_window;
     self->update = Graphics_update;
     self->exit = Graphics_exit;

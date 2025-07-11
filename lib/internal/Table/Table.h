@@ -1,12 +1,11 @@
 //
-// Created by bence on 2025. 05. 24..
+// Created by User on 2025. 05. 31..
 //
 
 #ifndef TABLE_H
 #define TABLE_H
 
 #include "../Graphics/Graphics.h"
-
 
 #define TABLE_SIZE 20
 #define TILE_SIZE 20
@@ -18,8 +17,7 @@ typedef enum {
     MISS
 } tile;
 
-extern COLOR tile_colors[256]; // assuming char (1 byte)
-
+extern COLOR tile_colors[256];
 
 typedef struct Table Table;
 
@@ -36,7 +34,6 @@ struct Table {
     bool (*generate_random)(Table *t);
 };
 
-
 bool Table_init(Table *t);
 
 bool Table_set_tile(Table *t, unsigned int x, unsigned int y, tile value);
@@ -48,6 +45,5 @@ bool Table_set_ship(Table *t, unsigned int x, unsigned int y, unsigned int ship_
 bool Table_generate_random(Table *t);
 
 bool Table_row_is_empty(Table *t, unsigned int startX, unsigned int startY, unsigned int endX, unsigned int endY);
-
 
 #endif //TABLE_H

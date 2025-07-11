@@ -6,7 +6,7 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include "../UtilMacros/UtilMacros.h"
+#include "../Common.h"
 
 COLOR tile_colors[256] = {
     [EMPTY] = COLOR_RGB(0, 0, 255),
@@ -84,7 +84,7 @@ inline bool Table_set_ship(Table *t, unsigned int x, unsigned int y, unsigned in
 }
 
 inline bool Table_generate_random(Table *t) {
-    const unsigned int ships[] = {5, 4, 4, 3, 3, 2, 2, 1, 1};
+    const unsigned int ships[] = {5, 4, 4, 3, 3, 2, 2};
 
     foreach(unsigned int ship_size, ships) {
         unsigned x, y, horizontal;

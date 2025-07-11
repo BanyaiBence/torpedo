@@ -1,0 +1,1 @@
+/usr/lib64/ccache/cc -pthread -Wl,--dependency-file=CMakeFiles/Torpedo.dir/link.d CMakeFiles/Torpedo.dir/main.c.o CMakeFiles/Torpedo.dir/table.c.o CMakeFiles/Torpedo.dir/lib/internal/Graphics/Graphics.c.o CMakeFiles/Torpedo.dir/lib/internal/Table/Table.c.o -o Torpedo  lib/external/SDL/libSDL3.a -lm

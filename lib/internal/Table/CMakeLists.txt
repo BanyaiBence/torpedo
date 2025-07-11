@@ -1,4 +1,3 @@
-
 add_library(Table
         Table.c
         Table.h
@@ -6,7 +5,7 @@ add_library(Table
 
 # Link SDL3 (static)
 target_link_libraries(Table PRIVATE Graphics)
-target_link_libraries(Table PRIVATE SDL3::SDL3)
+
 
 target_include_directories(Table
         PUBLIC
@@ -18,4 +17,3 @@ set_target_properties(Table PROPERTIES
         VERSION 1.0.0
         SOVERSION 1
 )
-

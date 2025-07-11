@@ -1,0 +1,14 @@
+/home/bencebn/dev/teaching/Torpedo/build/CMakeFiles/Torpedo.dir
+/home/bencebn/dev/teaching/Torpedo/build/CMakeFiles/edit_cache.dir
+/home/bencebn/dev/teaching/Torpedo/build/CMakeFiles/rebuild_cache.dir
+/home/bencebn/dev/teaching/Torpedo/build/lib/external/SDL/CMakeFiles/SDL3-static.dir
+/home/bencebn/dev/teaching/Torpedo/build/lib/external/SDL/CMakeFiles/SDL3_test.dir
+/home/bencebn/dev/teaching/Torpedo/build/lib/external/SDL/CMakeFiles/SDL_uclibc.dir
+/home/bencebn/dev/teaching/Torpedo/build/lib/external/SDL/CMakeFiles/edit_cache.dir
+/home/bencebn/dev/teaching/Torpedo/build/lib/external/SDL/CMakeFiles/rebuild_cache.dir
+/home/bencebn/dev/teaching/Torpedo/build/lib/internal/Graphics/CMakeFiles/Graphics.dir
+/home/bencebn/dev/teaching/Torpedo/build/lib/internal/Graphics/CMakeFiles/edit_cache.dir
+/home/bencebn/dev/teaching/Torpedo/build/lib/internal/Graphics/CMakeFiles/rebuild_cache.dir
+/home/bencebn/dev/teaching/Torpedo/build/lib/internal/Table/CMakeFiles/Table.dir
+/home/bencebn/dev/teaching/Torpedo/build/lib/internal/Table/CMakeFiles/edit_cache.dir
+/home/bencebn/dev/teaching/Torpedo/build/lib/internal/Table/CMakeFiles/rebuild_cache.dir
