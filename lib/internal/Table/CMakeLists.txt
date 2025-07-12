@@ -3,14 +3,14 @@ add_library(Table
         Table.h
 )
 
-# Link SDL3 (static)
-target_link_libraries(Table PRIVATE Graphics)
-
 
 target_include_directories(Table
         PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
 )
+
+target_link_libraries(Table PRIVATE SDL3::SDL3)
+target_link_libraries(Table PRIVATE Graphics)
 
 
 set_target_properties(Table PROPERTIES

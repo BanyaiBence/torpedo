@@ -1,0 +1,26 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  )
+
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/bencebn/dev/torpedo/lib/internal/Graphics/Graphics.c" "CMakeFiles/torpedo.dir/lib/internal/Graphics/Graphics.c.o" "gcc" "CMakeFiles/torpedo.dir/lib/internal/Graphics/Graphics.c.o.d"
+  "/home/bencebn/dev/torpedo/lib/internal/Table/Table.c" "CMakeFiles/torpedo.dir/lib/internal/Table/Table.c.o" "gcc" "CMakeFiles/torpedo.dir/lib/internal/Table/Table.c.o.d"
+  "/home/bencebn/dev/torpedo/main.c" "CMakeFiles/torpedo.dir/main.c.o" "gcc" "CMakeFiles/torpedo.dir/main.c.o.d"
+  "" "torpedo" "gcc" "CMakeFiles/torpedo.dir/link.d"
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")

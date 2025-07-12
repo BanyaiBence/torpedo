@@ -6,8 +6,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/Torpedo.dir/lib/internal/Table/Table.c.o.d"
   "CMakeFiles/Torpedo.dir/main.c.o"
   "CMakeFiles/Torpedo.dir/main.c.o.d"
-  "CMakeFiles/Torpedo.dir/table.c.o"
-  "CMakeFiles/Torpedo.dir/table.c.o.d"
   "Torpedo"
   "Torpedo.pdb"
 )

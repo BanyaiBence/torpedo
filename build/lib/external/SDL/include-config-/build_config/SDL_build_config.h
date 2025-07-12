@@ -444,7 +444,7 @@
 /* #undef SDL_VIDEO_RENDER_D3D12 */
 #define SDL_VIDEO_RENDER_GPU 1
 /* #undef SDL_VIDEO_RENDER_METAL */
-/* #undef SDL_VIDEO_RENDER_VULKAN */
+#define SDL_VIDEO_RENDER_VULKAN 1
 #define SDL_VIDEO_RENDER_OGL 1
 #define SDL_VIDEO_RENDER_OGL_ES2 1
 /* #undef SDL_VIDEO_RENDER_NGAGE */
@@ -466,7 +466,7 @@
 /* #undef SDL_VIDEO_STATIC_ANGLE */
 
 /* Enable Vulkan support */
-/* #undef SDL_VIDEO_VULKAN */
+#define SDL_VIDEO_VULKAN 1
 
 /* Enable Metal support */
 /* #undef SDL_VIDEO_METAL */
@@ -474,7 +474,7 @@
 /* Enable GPU support */
 /* #undef SDL_GPU_D3D11 */
 /* #undef SDL_GPU_D3D12 */
-/* #undef SDL_GPU_VULKAN */
+#define SDL_GPU_VULKAN 1
 /* #undef SDL_GPU_METAL */
 
 /* #undef SDL_GPU_PRIVATE */

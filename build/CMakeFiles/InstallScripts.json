@@ -1,0 +1,10 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/bencebn/dev/torpedo/build/cmake_install.cmake",
+		"/home/bencebn/dev/torpedo/build/lib/external/SDL/cmake_install.cmake",
+		"/home/bencebn/dev/torpedo/build/lib/internal/Graphics/cmake_install.cmake",
+		"/home/bencebn/dev/torpedo/build/lib/internal/Table/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

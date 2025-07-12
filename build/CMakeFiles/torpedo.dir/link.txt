@@ -1,0 +1,1 @@
+/usr/lib64/ccache/cc -Wl,--dependency-file=CMakeFiles/torpedo.dir/link.d CMakeFiles/torpedo.dir/lib/internal/Graphics/Graphics.c.o CMakeFiles/torpedo.dir/lib/internal/Table/Table.c.o CMakeFiles/torpedo.dir/main.c.o -o torpedo  -Wl,-rpath,/home/bencebn/dev/torpedo/build libSDL3.so.0.3.0

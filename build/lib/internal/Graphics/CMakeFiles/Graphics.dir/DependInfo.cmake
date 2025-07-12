@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/bencebn/dev/teaching/Torpedo/lib/internal/Graphics/Graphics.c" "lib/internal/Graphics/CMakeFiles/Graphics.dir/Graphics.c.o" "gcc" "lib/internal/Graphics/CMakeFiles/Graphics.dir/Graphics.c.o.d"
+  "/home/bencebn/dev/torpedo/lib/internal/Graphics/Graphics.c" "lib/internal/Graphics/CMakeFiles/Graphics.dir/Graphics.c.o" "gcc" "lib/internal/Graphics/CMakeFiles/Graphics.dir/Graphics.c.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

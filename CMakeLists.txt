@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.30)
-project(Torpedo C)
+project(torpedo C)
 
 set(CMAKE_C_STANDARD 23)
 
@@ -11,14 +11,14 @@ add_subdirectory(lib/external/SDL EXCLUDE_FROM_ALL)
 add_subdirectory(lib/internal/Graphics)
 add_subdirectory(lib/internal/Table)
 
-add_executable(Torpedo main.c
-        table.c
-        table.h
-        lib/internal/Graphics/Graphics.c
+
+add_executable(torpedo 
         lib/internal/Graphics/Graphics.h
-        lib/internal/Common.h
-        lib/internal/Table/Table.c
+        lib/internal/Graphics/Graphics.c
         lib/internal/Table/Table.h
+        lib/internal/Table/Table.c
+        lib/internal/Common.h
+        main.c
 )
 
-target_link_libraries(Torpedo PRIVATE SDL3::SDL3)
+target_link_libraries(torpedo PRIVATE SDL3::SDL3)

@@ -8,10 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/bencebn/dev/teaching/Torpedo/lib/internal/Graphics/Graphics.c" "CMakeFiles/Torpedo.dir/lib/internal/Graphics/Graphics.c.o" "gcc" "CMakeFiles/Torpedo.dir/lib/internal/Graphics/Graphics.c.o.d"
-  "/home/bencebn/dev/teaching/Torpedo/lib/internal/Table/Table.c" "CMakeFiles/Torpedo.dir/lib/internal/Table/Table.c.o" "gcc" "CMakeFiles/Torpedo.dir/lib/internal/Table/Table.c.o.d"
-  "/home/bencebn/dev/teaching/Torpedo/main.c" "CMakeFiles/Torpedo.dir/main.c.o" "gcc" "CMakeFiles/Torpedo.dir/main.c.o.d"
-  "/home/bencebn/dev/teaching/Torpedo/table.c" "CMakeFiles/Torpedo.dir/table.c.o" "gcc" "CMakeFiles/Torpedo.dir/table.c.o.d"
+  "/home/bencebn/dev/torpedo/lib/internal/Graphics/Graphics.c" "CMakeFiles/Torpedo.dir/lib/internal/Graphics/Graphics.c.o" "gcc" "CMakeFiles/Torpedo.dir/lib/internal/Graphics/Graphics.c.o.d"
+  "/home/bencebn/dev/torpedo/lib/internal/Table/Table.c" "CMakeFiles/Torpedo.dir/lib/internal/Table/Table.c.o" "gcc" "CMakeFiles/Torpedo.dir/lib/internal/Table/Table.c.o.d"
+  "/home/bencebn/dev/torpedo/main.c" "CMakeFiles/Torpedo.dir/main.c.o" "gcc" "CMakeFiles/Torpedo.dir/main.c.o.d"
   "" "Torpedo" "gcc" "CMakeFiles/Torpedo.dir/link.d"
   )
 

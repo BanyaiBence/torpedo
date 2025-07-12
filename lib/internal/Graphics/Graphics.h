@@ -32,6 +32,8 @@ struct Graphics {
     void (*exit)(Graphics *self);
 
     void (*get_mouse_position)(Graphics *self, float *x, float *y);
+
+    void (*draw_line)(Graphics *self, const float start_x, const float start_y, const float end_x, const float end_y,  const COLOR color);
 };
 
 void Graphics_init(Graphics *self);
@@ -49,6 +51,8 @@ void Graphics_update(Graphics *self);
 void Graphics_get_mouse_position(Graphics *self, float *x, float *y);
 
 void Graphics_exit(Graphics *self);
+
+void Graphics_draw_line(Graphics *self, float start_x, float start_y, float end_x, float end_y, COLOR color);
 
 
 #endif //SDL3WRAPPER_H

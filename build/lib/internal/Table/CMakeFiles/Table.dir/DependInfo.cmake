@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/bencebn/dev/teaching/Torpedo/lib/internal/Table/Table.c" "lib/internal/Table/CMakeFiles/Table.dir/Table.c.o" "gcc" "lib/internal/Table/CMakeFiles/Table.dir/Table.c.o.d"
+  "/home/bencebn/dev/torpedo/lib/internal/Table/Table.c" "lib/internal/Table/CMakeFiles/Table.dir/Table.c.o" "gcc" "lib/internal/Table/CMakeFiles/Table.dir/Table.c.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

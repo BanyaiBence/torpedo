@@ -59,6 +59,11 @@ inline void Graphics_get_mouse_position(Graphics *self, float *x, float *y) {
     SDL_GetMouseState(x, y);
 }
 
+inline void Graphics_draw_line(Graphics *self, const float start_x, const float start_y, const float end_x, const float end_y, const COLOR color){
+    SDL_SetRenderDrawColor(self->renderer, color.r, color.g, color.b, color.a);
+    SDL_RenderLine(self->renderer, start_x, start_y, end_x, end_y);
+}
+
 void Graphics_init(Graphics *self) {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         SDL_Log("Could not initialize SDL: %s", SDL_GetError());
@@ -73,4 +78,5 @@ void Graphics_init(Graphics *self) {
     self->update = Graphics_update;
     self->exit = Graphics_exit;
     self->get_mouse_position = Graphics_get_mouse_position;
+    self->draw_line = Graphics_draw_line;
 }
